@@ -6,7 +6,6 @@ import {Suspense} from "react";
 import {CardSkeleton, InvoiceSkeleton, RevenueChartSkeleton} from "@/app/ui/skeletons";
 
 export default async function Page() {
-    // 此处使用的是es6的特性, 解构赋值
     return (
         <main>
             <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>

@@ -15,6 +15,7 @@ const iconMap = {
 };
 
 export default async function CardWrapper() {
+    // 此处使用的是es6的特性, 解构赋值
   const {
       totalPaidInvoices,
       totalPendingInvoices,
