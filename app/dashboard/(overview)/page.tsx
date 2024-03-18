@@ -3,10 +3,10 @@ import RevenueChart from '@/app/ui/dashboard/revenue-chart';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from '@/app/ui/fonts';
 import {fetchCardData, fetchLatestInvoices, fetchRevenue} from "@/app/lib/data";
+import {Suspense} from "react";
+import {InvoiceSkeleton, RevenueChartSkeleton} from "@/app/ui/skeletons";
 
 export default async function Page() {
-    const revenue = await fetchRevenue();
-    const latestInvoices = await fetchLatestInvoices();
     // 此处使用的是es6的特性, 解构赋值
     const {
         numberOfCustomers,
@@ -29,8 +29,13 @@ export default async function Page() {
                  <Card title="Total Customers" value={numberOfCustomers} type="customers"/>
             </div>
             <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-                 <RevenueChart revenue={revenue}  />
-                 <LatestInvoices latestInvoices={latestInvoices} />
+                 {/*<RevenueChart revenue={revenue}  />*/}
+                <Suspense fallback={<RevenueChartSkeleton/>}>
+                    <RevenueChart/>
+                </Suspense>
+                <Suspense fallback={<InvoiceSkeleton/>}>
+                    <LatestInvoices/>
+                </Suspense>
             </div>
         </main>
     );
